@@ -90,6 +90,7 @@ import os
 import pytz
 import socket
 import stripe
+import random
 import re
 import uuid
 import decimal
@@ -402,7 +403,6 @@ class HomeView(FeaturedOffersContextMixin, FormView):
         except Exception as e:
             pass
 
-        logger.info(context)
         return context
 
 
@@ -4680,6 +4680,30 @@ def org_user_list(request, org_id):
 
     return HttpResponse(
         content=json.dumps(org_user_list),
+        status=200
+    )
+
+
+def get_featured_offers(request):
+    '''
+    - simulates dynamic featured offers list
+    - returns 4 featured offers
+    '''
+    offers = Offer.objects.all()
+    featured_offers_list = []
+    for offer in offers:
+        try:
+            logo_url = offer.org.logo.url
+            featured_offers_list.append({
+                'name': offer.org.name,
+                'discount': offer.currents_share,
+                'logo': logo_url
+            })
+        except ValueError:
+            pass
+
+    return HttpResponse(
+        content=json.dumps(random.sample(featured_offers_list, 4)),
         status=200
     )
 

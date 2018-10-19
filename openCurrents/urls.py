@@ -149,6 +149,7 @@ urlpatterns = [
     url(r'^event_register/(?P<pk>\d+)/$', views.event_register, name='event_register'),
     url(r'^event_register_live/(?P<eventid>\d+)/$',
         views.event_register_live, name='event_register_live'),
+    url(r'^get_featured_offers/$', views.get_featured_offers, name='get_featured_offers'),
     url(r'^org_user_list/(?P<org_id>\d+)/$', views.org_user_list, name='org_user_list'),
     url(r'^process_login/$', views.process_login, name='process_login'),
     url(r'^process_OrgNomination/$', views.process_OrgNomination, name='process_OrgNomination'),
