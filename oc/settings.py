@@ -41,19 +41,20 @@ INSTALLED_APPS = [
     'macros',
     'django_extensions',
     'import_export',
-    'django_admin_listfilter_dropdown'
+    'django_admin_listfilter_dropdown',
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
     'openCurrents.middleware.AutoLogout',
 ]
 
@@ -204,3 +205,7 @@ SENDEMAILS = os.getenv('OC_SEND_EMAILS')
 if os.getenv('GAE_INSTANCE'):
     # override to True in production even if env var is not set
     SENDEMAILS = True
+
+CORS_ORIGIN_WHITELIST = (
+    'open_currents.devdoubledigit.com'
+)
